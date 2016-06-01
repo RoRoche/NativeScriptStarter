@@ -8,6 +8,10 @@
 sudo npm install -g nativescript
 ```
 
+### Install Visual Studo Code and its NativeScript extension
+
+Cf. <http://docs.nativescript.org/angular/core-concepts/visual-studio-code-extension>
+
 ### Useful commands
 
 * Run application on iOS Simulator
