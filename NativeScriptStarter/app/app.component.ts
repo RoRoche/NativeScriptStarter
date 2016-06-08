@@ -12,8 +12,8 @@ import {CreateComponent} from "./components/create/create.component";
     template: "<page-router-outlet></page-router-outlet>"
 })
 @RouteConfig([
-    { path: "/list", component: ListComponent, name: "List", useAsDefault: true },
-    { path: "/create", component: CreateComponent, name: "Create" },
+    { path: "/list", component: ListComponent, name: ListComponent.ID, useAsDefault: true },
+    { path: "/create", component: CreateComponent, name: CreateComponent.ID },
 ])
 export class AppComponent {
 }

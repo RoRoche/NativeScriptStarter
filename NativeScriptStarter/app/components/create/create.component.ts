@@ -7,6 +7,8 @@ import * as applicationSettings from "application-settings";
     templateUrl: "./components/create/create.html",
 })
 export class CreateComponent {
+    public static get ID():string { return "Create"; }
+
     location: Location;
     firstname: string;
     lastname: string;

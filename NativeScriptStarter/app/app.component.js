@@ -15,8 +15,8 @@ var AppComponent = (function () {
             template: "<page-router-outlet></page-router-outlet>"
         }),
         router_deprecated_1.RouteConfig([
-            { path: "/list", component: list_component_1.ListComponent, name: "List", useAsDefault: true },
-            { path: "/create", component: create_component_1.CreateComponent, name: "Create" },
+            { path: "/list", component: list_component_1.ListComponent, name: list_component_1.ListComponent.ID, useAsDefault: true },
+            { path: "/create", component: create_component_1.CreateComponent, name: create_component_1.CreateComponent.ID },
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

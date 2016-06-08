@@ -1,0 +1,96 @@
+@startuml
+
+title NativeScript architecture - Class Diagram
+
+package "angular" {
+    package "common" {
+        class Location
+    }
+    package "routerDeprecated" {
+        class Router
+    }
+}
+
+package "Core" {
+    interface IComponent<TModel extends IModel, TInteractor extends IInteractor, TWireframe extends IWireframe> {
+        + model(): TModel;
+        + interactor(): TInteractor;
+        + wireframe(): TWireframe;
+    }
+    
+    abstract class AbstractComponent<TModel extends IModel> {
+    }
+    
+    interface IModel {
+    }
+    
+    interface IInteractor {
+    }
+    
+    interface IEntity {
+    }
+    
+    interface IWireframe {
+        + router(): Router;
+        + location(): Location;
+    }
+    
+    IComponent "1"*-"1" IModel : provides >
+    
+    IComponent "1"*-"1" IInteractor : interacts with >
+    
+    IComponent "1"*-"1" IWireframe : routes >
+    
+    IWireframe "1"*-"1" Router : owns >
+    IWireframe "1"*-"1" Location : owns >
+    
+    IComponent <|- AbstractComponent
+}
+
+package "App" {
+    package "Entities" {
+        class DomainEntity {
+        }
+        
+        IEntity <|- DomainEntity
+    }
+    
+    package "Repositories" {
+        class LocalDomainRepository {
+            + selectAll(): Observable<DomainEntity>;
+        }
+        
+        class RemoteDomainRepository {
+            + queryForAll(): Observable<DomainEntity>;
+        }
+        
+        LocalDomainRepository "0..1"--"0..n" DomainEntity : provides >
+        RemoteDomainRepository "0..1"--"0..n" DomainEntity : provides >
+    }
+
+    package "DomainModule" {
+        class DomainModel {
+            + data: Array<DomainEntity>;
+        }
+        
+        class DomainInteractor {
+            + loadDomainEntities(): Observable<Boolean>;
+        }
+        
+        class DomainComponent<DomainModel, DomainInteractor, DomainWireframe> {
+        }
+        
+        class DomainWireframe {
+        }
+        
+        AbstractComponent <|- DomainComponent
+        IModel <|- DomainModel
+        IInteractor <|- DomainInteractor
+        IWireframe <|- DomainWireframe
+    
+        DomainInteractor "0..n"-->"0..1" LocalDomainRepository : uses >
+        DomainInteractor "0..n"-->"0..1" RemoteDomainRepository : uses >
+    }
+}
+
+@enduml

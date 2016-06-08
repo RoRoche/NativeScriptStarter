@@ -8,6 +8,11 @@ var CreateComponent = (function () {
         this.firstname = "";
         this.lastname = "";
     }
+    Object.defineProperty(CreateComponent, "ID", {
+        get: function () { return "Create"; },
+        enumerable: true,
+        configurable: true
+    });
     CreateComponent.prototype.save = function () {
         if (this.firstname != "" && this.lastname != "") {
             var people = JSON.parse(applicationSettings.getString("people", "[]"));

@@ -1,2 +1,24 @@
 
 *.log
+
+*.js
+
+*.map
+
+*.js
+
+*.map
+
+NativeScriptStarter/.DS_Store
+
+*.js
+
+*.map
+
+NativeScriptStarter/core/.DS_Store
+
+*.js
+
+*.js
+
+*.map
