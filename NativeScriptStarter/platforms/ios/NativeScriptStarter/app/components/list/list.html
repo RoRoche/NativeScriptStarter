@@ -1,8 +1,8 @@
 <ActionBar title="Person List">
-    <ActionItem text="Create" (tap)="presenter.onClickCreate()" ios.position="right"></ActionItem>
+    <ActionItem text="Create" (tap)="onClickCreate()" ios.position="right"></ActionItem>
 </ActionBar>
 <GridLayout>
-    <ListView [items]="presenter.model.personList">
+    <ListView [items]="model.personList">
         <template let-item="item">
             <Label [text]="item.firstname + ' ' + item.lastname"></Label>
         </template>

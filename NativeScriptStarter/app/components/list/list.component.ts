@@ -1,32 +1,37 @@
 import {Component} from "@angular/core";
 import {Location} from "@angular/common";
 import {Router} from "@angular/router-deprecated";
-
 import * as applicationSettings from "application-settings";
 
-import {AbstractListViewController} from "./list";
-import {IListView} from "./list";
-import {ListPresenter} from "./list.presenter";
 import {ListModel} from "./list.model";
-import {ListWireframe} from "./list.wireframe";
  
 @Component({
     selector: "list",
     templateUrl: "./components/list/list.html",
 })
-export class ListComponent extends AbstractListViewController {
-    public static get ID():string { return "List"; }
+export class ListComponent {
+    public static get ID(): string { return "List"; }
 
+    model: ListModel;
+    
     router: Router;
-    personList: Array<Object>;
  
     constructor(pRouter: Router, pLocation: Location) {
-        super(new ListPresenter(), new ListModel(), new ListWireframe(pRouter, pLocation));
+        this.model = new ListModel();
+        this.router = pRouter;
         
-        this.presenter.loadData();
+        this.loadData();
 
         pLocation.subscribe((path) => {
-            this.presenter.loadData();
+            this.loadData();
         });
+    }
+
+    private loadData(): void {
+        this.model.personList = JSON.parse(applicationSettings.getString("people", "[]"));
+    }
+ 
+    public onClickCreate(): void {
+        this.router.navigate(["Create"]);
     }
 }

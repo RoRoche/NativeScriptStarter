@@ -2,18 +2,16 @@
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var router_deprecated_1 = require("@angular/router-deprecated");
-var list_1 = require("./list");
-var list_presenter_1 = require("./list.presenter");
+var applicationSettings = require("application-settings");
 var list_model_1 = require("./list.model");
-var list_wireframe_1 = require("./list.wireframe");
-var ListComponent = (function (_super) {
-    __extends(ListComponent, _super);
+var ListComponent = (function () {
     function ListComponent(pRouter, pLocation) {
         var _this = this;
-        _super.call(this, new list_presenter_1.ListPresenter(), new list_model_1.ListModel(), new list_wireframe_1.ListWireframe(pRouter, pLocation));
-        this.presenter.loadData();
+        this.model = new list_model_1.ListModel();
+        this.router = pRouter;
+        this.loadData();
         pLocation.subscribe(function (path) {
-            _this.presenter.loadData();
+            _this.loadData();
         });
     }
     Object.defineProperty(ListComponent, "ID", {
@@ -21,6 +19,12 @@ var ListComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ListComponent.prototype.loadData = function () {
+        this.model.personList = JSON.parse(applicationSettings.getString("people", "[]"));
+    };
+    ListComponent.prototype.onClickCreate = function () {
+        this.router.navigate(["Create"]);
+    };
     ListComponent = __decorate([
         core_1.Component({
             selector: "list",
@@ -29,6 +33,6 @@ var ListComponent = (function (_super) {
         __metadata('design:paramtypes', [router_deprecated_1.Router, common_1.Location])
     ], ListComponent);
     return ListComponent;
-}(list_1.AbstractListViewController));
+}());
 exports.ListComponent = ListComponent;
 //# sourceMappingURL=list.component.js.map
