@@ -5,6 +5,7 @@ import * as applicationSettings from "application-settings";
 
 import {ListModel} from "./list.model";
 import {ListInteractor} from "./list.interactor";
+import {ListWireframe} from "./list.wireframe";
 
 import dialogs = require("ui/dialogs");
 
@@ -19,12 +20,12 @@ export class ListComponent {
 
     model: ListModel;
     interactor: ListInteractor;
-    router: Router;
+    wireframe: ListWireframe;
  
     constructor(pRouter: Router, pLocation: Location) {
         this.model = new ListModel();
         this.interactor = new ListInteractor();
-        this.router = pRouter;
+        this.wireframe = new ListWireframe(pRouter, pLocation);
         
         this.loadData();
 
@@ -44,6 +45,6 @@ export class ListComponent {
     }
  
     public onClickCreate(): void {
-        this.router.navigate([CreateComponent.ID]);
+        this.wireframe.goToCreate();
     }
 }

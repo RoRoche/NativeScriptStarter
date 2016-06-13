@@ -4,14 +4,14 @@ var common_1 = require("@angular/common");
 var router_deprecated_1 = require("@angular/router-deprecated");
 var list_model_1 = require("./list.model");
 var list_interactor_1 = require("./list.interactor");
+var list_wireframe_1 = require("./list.wireframe");
 var dialogs = require("ui/dialogs");
-var create_component_1 = require("../create/create.component");
 var ListComponent = (function () {
     function ListComponent(pRouter, pLocation) {
         var _this = this;
         this.model = new list_model_1.ListModel();
         this.interactor = new list_interactor_1.ListInteractor();
-        this.router = pRouter;
+        this.wireframe = new list_wireframe_1.ListWireframe(pRouter, pLocation);
         this.loadData();
         pLocation.subscribe(function (path) {
             _this.loadData();
@@ -33,7 +33,7 @@ var ListComponent = (function () {
         });
     };
     ListComponent.prototype.onClickCreate = function () {
-        this.router.navigate([create_component_1.CreateComponent.ID]);
+        this.wireframe.goToCreate();
     };
     ListComponent = __decorate([
         core_1.Component({

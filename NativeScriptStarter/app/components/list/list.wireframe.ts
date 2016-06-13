@@ -1,8 +1,15 @@
-import {IListWireframe} from "./list";
+import {Location} from "@angular/common";
+import {Router} from "@angular/router-deprecated";
 
-import {AbstractWireframe} from "../../../core/AbstractWireframe";
+export class ListWireframe {
 
-export class ListWireframe extends AbstractWireframe implements IListWireframe {
+    router: Router;
+    location: Location;
+
+    constructor(pRouter: Router, pLocation: Location) {
+       this.router = pRouter;
+       this.location = pLocation;
+    }
 
     public goToCreate(): void {
         this.router.navigate(["Create"]);
