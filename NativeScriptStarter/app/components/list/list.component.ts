@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 import {Location} from "@angular/common";
 import {Router} from "@angular/router-deprecated";
-import * as applicationSettings from "application-settings";
 
 import {ListModel} from "./list.model";
 import {ListInteractor} from "./list.interactor";

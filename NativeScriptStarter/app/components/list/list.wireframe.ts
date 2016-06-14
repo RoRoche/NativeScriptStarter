@@ -1,14 +1,18 @@
 import {Location} from "@angular/common";
 import {Router} from "@angular/router-deprecated";
 
-import {AbstractWireframe} from "./AbstractWireframe";
+import {IWireframe} from "../../../core/IWireframe";
 
 import {CreateComponent} from "../create/create.component"
 
-export class ListWireframe extends AbstractWireframe {
+export class ListWireframe implements IWireframe {
+
+    router: Router;
+    location: Location;
 
     constructor(pRouter: Router, pLocation: Location) {
-        super(pRouter, pLocation);
+       this.router = pRouter;
+       this.location = pLocation;
     }
 
     public goToCreate(): void {
